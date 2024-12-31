@@ -7,9 +7,12 @@
 
 import SwiftUI
 import MillerKit
+import TSCUtility
 
 struct ContentView: View {
+
     // MARK: - State Variables
+
     @State private var jsonInput: String = """
 {
   "Life": {
@@ -31,14 +34,18 @@ struct ContentView: View {
   }
 }
 """
-    @State private var myItem: Item? = nil
+    @State private var myItem: LazyItem? = nil
     @State private var errorMessage: String? = nil
 
     var body: some View {
         VStack {
             // MARK: - Miller Column View
             if let myItem {
-                MillerView(minedSymbols: .constant([myItem]))
+                LazyMillerView(
+                    rootStream: singletonStream(myItem),
+                    jumpTo: [],
+                    ctx: Context()
+                )
             } else if let errorMessage {
                 // Error View
                 Text("Error: \(errorMessage)")
@@ -49,6 +56,7 @@ struct ContentView: View {
             Divider()
 
             // MARK: - JSON Input Text Editor
+            /*
             TextEditor(text: $jsonInput)
                 .border(Color.gray, width: 1)
                 .padding()
@@ -56,6 +64,7 @@ struct ContentView: View {
                 .onChange(of: jsonInput) { newValue in
                     updateMillerView(with: newValue)
                 }
+             */
         }
         .padding()
         .onAppear {
@@ -68,7 +77,7 @@ struct ContentView: View {
     private func updateMillerView(with json: String) {
         do {
             errorMessage = nil
-            myItem = try Item.fromJSON(from: json)
+            myItem = try LazyItem.fromJSON(from: json)
         } catch {
             errorMessage = "Invalid JSON format"
             myItem = nil
