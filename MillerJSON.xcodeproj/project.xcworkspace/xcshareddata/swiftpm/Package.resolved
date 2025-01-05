@@ -15,8 +15,7 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/ladanjohari/MillerKit",
       "state" : {
-        "branch" : "main",
-        "revision" : "2f89b5fa00f31a94bce61e4aa79d8f5c0ede8fe0"
+        "revision" : "028d858dee9d3a3eafa375de6cbaeaabb02cdc14"
       }
     },
     {

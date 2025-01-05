@@ -65,7 +65,8 @@ struct ContentView: View {
                 LazyMillerView(
                     rootStream: singletonStream(myItem),
                     jumpTo: [],
-                    ctx: Context()
+                    ctx: Context(),
+                    showPrompt: false
                 )
             } else if let errorMessage = viewModel.errorMessage {
                 // Error View
