@@ -39,6 +39,21 @@ class ContentViewModel: ObservableObject {
     // MARK: - Initialization
     init() {
         updateMillerView(with: jsonInput)
+        // Listen for file drop notifications
+        NotificationCenter.default.addObserver(self, selector: #selector(handleFileOpen(_:)), name: .didOpenFile, object: nil)
+        updateMillerView(with: jsonInput)
+    }
+    
+   
+    
+    @objc private func handleFileOpen(_ notification: Notification) {
+        print("\(notification)")
+        if let fileContents = notification.object as? String {
+            DispatchQueue.main.async {
+                self.jsonInput = fileContents
+                self.updateMillerView(with: fileContents)
+            }
+        }
     }
 
     // MARK: - Methods
@@ -53,13 +68,18 @@ class ContentViewModel: ObservableObject {
     }
 }
 
+
+
 struct ContentView: View {
 
     // MARK: - ViewModel
     @StateObject private var viewModel = ContentViewModel()
+    @State private var recivedURLs: [Foundation.URL] = []
 
     var body: some View {
         VStack {
+            Text(recivedURLs.map{$0.absoluteString}
+                .joined(separator: "\n"))
             // MARK: - Miller Column View
             if let myItem = viewModel.myItem {
                 LazyMillerView(
@@ -87,6 +107,17 @@ struct ContentView: View {
                 } */
         }
         .padding()
+        .onReceive(NotificationCenter.default.publisher(for: .didOpenFile)) { notification in
+            print("\(notification)")
+            if let urls = notification.userInfo?["URLs"] as? [Foundation.URL] {
+                recivedURLs = urls
+                if let onlyURL = urls.first {
+                    if let jsonContent = try? String(contentsOf: onlyURL, encoding: .utf8) {
+                        viewModel.updateMillerView(with: jsonContent)
+                    }
+                }
+            }
+        }
     }
 }
 
