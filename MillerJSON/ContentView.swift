@@ -38,10 +38,8 @@ class ContentViewModel: ObservableObject {
 
     // MARK: - Initialization
     init() {
-        updateMillerView(with: jsonInput)
         // Listen for file drop notifications
         NotificationCenter.default.addObserver(self, selector: #selector(handleFileOpen(_:)), name: .didOpenFile, object: nil)
-        updateMillerView(with: jsonInput)
     }
     
    
@@ -114,6 +112,8 @@ struct ContentView: View {
                 if let onlyURL = urls.first {
                     if let jsonContent = try? String(contentsOf: onlyURL, encoding: .utf8) {
                         viewModel.updateMillerView(with: jsonContent)
+                    } else {
+                        print("Cannot read file")
                     }
                 }
             }

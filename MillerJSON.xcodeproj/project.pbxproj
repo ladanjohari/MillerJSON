@@ -16,22 +16,9 @@
 		3222389C2CEC5DD800E6155A /* MillerJSON.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MillerJSON.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
-/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		32D054982D2B4B62006AA4C3 /* Exceptions for "MillerJSON" folder in "MillerJSON" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				Info.plist,
-			);
-			target = 3222389B2CEC5DD800E6155A /* MillerJSON */;
-		};
-/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
-
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		3222389E2CEC5DD800E6155A /* MillerJSON */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-				32D054982D2B4B62006AA4C3 /* Exceptions for "MillerJSON" folder in "MillerJSON" target */,
-			);
 			path = MillerJSON;
 			sourceTree = "<group>";
 		};
