@@ -54,7 +54,6 @@ class ContentViewModel: ObservableObject {
         }
     }
 
-    // MARK: - Methods
     func updateMillerView(with json: String) {
         do {
             errorMessage = nil
@@ -76,6 +75,16 @@ struct ContentView: View {
 
     var body: some View {
         VStack {
+            // Display dropped URLs or errors
+            if let errorMessage = viewModel.errorMessage {
+                Text("Error: \(errorMessage)")
+                    .foregroundColor(.red)
+            }
+            // JSON Input View
+            TextEditor(text: $viewModel.jsonInput)
+                .border(Color.gray)
+                .frame(height: 200)
+                .padding()
             Text(recivedURLs.map{$0.absoluteString}
                 .joined(separator: "\n"))
             // MARK: - Miller Column View
@@ -86,6 +95,15 @@ struct ContentView: View {
                     ctx: Context(),
                     showPrompt: false
                 )
+                .onTapGesture {
+                    // Handle row selection logic
+                    if let selected = viewModel.selectedRow {
+                        viewModel.selectedRow = selected == myItem.name ? nil : myItem.name
+                    } else {
+                        viewModel.selectedRow = myItem.name
+                    }
+                }
+                .background(viewModel.selectedRow == myItem.name ? Color.blue : Color.clear)
             } else if let errorMessage = viewModel.errorMessage {
                 // Error View
                 Text("Error: \(errorMessage)")
@@ -95,14 +113,6 @@ struct ContentView: View {
 
             Divider()
 
-            // MARK: - JSON Input Text Editor
-           /* TextEditor(text: $viewModel.jsonInput)
-                .border(Color.gray, width: 1)
-                .padding()
-                .frame(height: 150)
-                .onChange(of: viewModel.jsonInput) { newValue in
-                    viewModel.updateMillerView(with: newValue)
-                } */
         }
         .padding()
         .onReceive(NotificationCenter.default.publisher(for: .didOpenFile)) { notification in

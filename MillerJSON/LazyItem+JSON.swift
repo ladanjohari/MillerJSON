@@ -1,6 +1,8 @@
 import Foundation
 import MillerKit
 
+// This code provides a robust way to parse JSON into hierarchical LazyItem objects while supporting lazy evaluation for better performance. It can handle complex nested structures and transforms JSON into an easily navigable object tree.
+
 extension LazyItem {
     // Main function to parse JSON from a string
     public static func fromJSON(from jsonString: String, name: String = "root", priority: UInt = 4) -> LazyItem? {
@@ -25,7 +27,7 @@ extension LazyItem {
             let subItems = dictionary.map { key, value in
                 fromJSON(name: key, json: value, priority: priority)
             }
-            return LazyItem(name, subItems: { ctx in
+            return LazyItem(name, urn: UUID().uuidString, subItems: { ctx in
                 AsyncStream { cont in
                     Task {
                         for item in subItems {
@@ -40,7 +42,7 @@ extension LazyItem {
             let subItems = array.enumerated().map { index, value in
                 Self.fromJSON(name: "\(name)[\(index)]", json: value, priority: priority)
             }
-            return LazyItem(name, subItems: { ctx in
+            return LazyItem(name, urn: UUID().uuidString, subItems: { ctx in
                 AsyncStream { cont in
                     Task {
                         for item in subItems {
@@ -52,7 +54,7 @@ extension LazyItem {
             })
         } else {
             // JSON is a literal, store its value in documentation
-            return LazyItem(name, attributes: { ctx in
+            return LazyItem(name, urn: UUID().uuidString, attributes: { ctx in
                 singletonStream(.documentation("\(json)"))
             })
         }

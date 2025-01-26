@@ -8,8 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		322238B02CEC5E3700E6155A /* MillerKit in Frameworks */ = {isa = PBXBuildFile; productRef = 322238AF2CEC5E3700E6155A /* MillerKit */; };
+		3242DD762D4205CD00F7B210 /* MillerKit in Frameworks */ = {isa = PBXBuildFile; productRef = 3242DD752D4205CD00F7B210 /* MillerKit */; };
+		32690D5B2D4343C800A1B781 /* MillerKit in Frameworks */ = {isa = PBXBuildFile; productRef = 32690D5A2D4343C800A1B781 /* MillerKit */; };
 		3C2F06072D2B42C7009C23AA /* MillerKit in Frameworks */ = {isa = PBXBuildFile; productRef = 3C2F06062D2B42C7009C23AA /* MillerKit */; };
-		3C2F060A2D2B43EF009C23AA /* MillerKit in Frameworks */ = {isa = PBXBuildFile; productRef = 3C2F06092D2B43EF009C23AA /* MillerKit */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,8 +30,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3C2F060A2D2B43EF009C23AA /* MillerKit in Frameworks */,
+				3242DD762D4205CD00F7B210 /* MillerKit in Frameworks */,
 				3C2F06072D2B42C7009C23AA /* MillerKit in Frameworks */,
+				32690D5B2D4343C800A1B781 /* MillerKit in Frameworks */,
 				322238B02CEC5E3700E6155A /* MillerKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -76,7 +78,8 @@
 			packageProductDependencies = (
 				322238AF2CEC5E3700E6155A /* MillerKit */,
 				3C2F06062D2B42C7009C23AA /* MillerKit */,
-				3C2F06092D2B43EF009C23AA /* MillerKit */,
+				3242DD752D4205CD00F7B210 /* MillerKit */,
+				32690D5A2D4343C800A1B781 /* MillerKit */,
 			);
 			productName = MillerJSON;
 			productReference = 3222389C2CEC5DD800E6155A /* MillerJSON.app */;
@@ -107,7 +110,7 @@
 			mainGroup = 322238932CEC5DD800E6155A;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
-				3C2F06082D2B43EF009C23AA /* XCRemoteSwiftPackageReference "MillerKit" */,
+				32690D592D4343C700A1B781 /* XCRemoteSwiftPackageReference "MillerKit" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 3222389D2CEC5DD800E6155A /* Products */;
@@ -340,12 +343,12 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		3C2F06082D2B43EF009C23AA /* XCRemoteSwiftPackageReference "MillerKit" */ = {
+		32690D592D4343C700A1B781 /* XCRemoteSwiftPackageReference "MillerKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/ladanjohari/MillerKit";
 			requirement = {
 				kind = revision;
-				revision = 028d858dee9d3a3eafa375de6cbaeaabb02cdc14;
+				revision = 79f8dd2465efd9137a0b71f554dc4697fb080e41;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -355,13 +358,17 @@
 			isa = XCSwiftPackageProductDependency;
 			productName = MillerKit;
 		};
-		3C2F06062D2B42C7009C23AA /* MillerKit */ = {
+		3242DD752D4205CD00F7B210 /* MillerKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = MillerKit;
 		};
-		3C2F06092D2B43EF009C23AA /* MillerKit */ = {
+		32690D5A2D4343C800A1B781 /* MillerKit */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 3C2F06082D2B43EF009C23AA /* XCRemoteSwiftPackageReference "MillerKit" */;
+			package = 32690D592D4343C700A1B781 /* XCRemoteSwiftPackageReference "MillerKit" */;
+			productName = MillerKit;
+		};
+		3C2F06062D2B42C7009C23AA /* MillerKit */ = {
+			isa = XCSwiftPackageProductDependency;
 			productName = MillerKit;
 		};
 /* End XCSwiftPackageProductDependency section */
