@@ -75,44 +75,38 @@ struct ContentView: View {
 
     var body: some View {
         VStack {
+            //JSON Link
+            Text(recivedURLs.map{$0.absoluteString}
+                .joined(separator: "\n"))
+            .frame(maxWidth: .infinity, minHeight: 32, alignment: .leading)
+            .background(Color.white)
+            .cornerRadius(8)
             // Display dropped URLs or errors
             if let errorMessage = viewModel.errorMessage {
                 Text("Error: \(errorMessage)")
                     .foregroundColor(.red)
             }
-            // JSON Input View
-            TextEditor(text: $viewModel.jsonInput)
-                .border(Color.gray)
-                .frame(height: 200)
-                .padding()
-            Text(recivedURLs.map{$0.absoluteString}
-                .joined(separator: "\n"))
             // MARK: - Miller Column View
             if let myItem = viewModel.myItem {
                 LazyMillerView(
                     rootStream: singletonStream(myItem),
                     jumpTo: [],
                     ctx: Context(),
-                    showPrompt: false
+                    showPrompt: true
                 )
-                .onTapGesture {
-                    // Handle row selection logic
-                    if let selected = viewModel.selectedRow {
-                        viewModel.selectedRow = selected == myItem.name ? nil : myItem.name
-                    } else {
-                        viewModel.selectedRow = myItem.name
-                    }
-                }
-                .background(viewModel.selectedRow == myItem.name ? Color.blue : Color.clear)
             } else if let errorMessage = viewModel.errorMessage {
                 // Error View
                 Text("Error: \(errorMessage)")
                     .foregroundColor(.red)
                     .padding()
+                    .cornerRadius(8)
             }
-
             Divider()
 
+            // JSON Input View
+            TextEditor(text: $viewModel.jsonInput)
+                .frame(maxWidth: .infinity, maxHeight: 200)
+                .cornerRadius(8)
         }
         .padding()
         .onReceive(NotificationCenter.default.publisher(for: .didOpenFile)) { notification in

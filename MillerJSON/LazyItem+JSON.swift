@@ -1,5 +1,6 @@
 import Foundation
 import MillerKit
+import SwiftUI
 
 // This code provides a robust way to parse JSON into hierarchical LazyItem objects while supporting lazy evaluation for better performance. It can handle complex nested structures and transforms JSON into an easily navigable object tree.
 
@@ -27,7 +28,7 @@ extension LazyItem {
             let subItems = dictionary.map { key, value in
                 fromJSON(name: key, json: value, priority: priority)
             }
-            return LazyItem(name, urn: UUID().uuidString, subItems: { ctx in
+            return LazyItem(name, urn: UUID().uuidString, color: Color.blue, subItems: { ctx in
                 AsyncStream { cont in
                     Task {
                         for item in subItems {
